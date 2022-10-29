@@ -1,0 +1,16 @@
+extends:
+  - "eslint:recommended"
+  - "plugin:@typescript-eslint/recommended"
+env:
+  node: true
+  mocha: true
+  es6: true
+parser: "@typescript-eslint/parser"
+plugins:
+  - "@typescript-eslint"
+root: true
+parserOptions:
+  sourceType: module
+  ecmaFeatures:
+    modules: true
+    
