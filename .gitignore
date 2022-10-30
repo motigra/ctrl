@@ -1,13 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-<<<<<<< HEAD
 node_modules/
 dist/
 build/
-=======
-/node_modules
->>>>>>> a7b5caa (react app bootstrap)
 /.pnp
 .pnp.js
 
