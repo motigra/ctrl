@@ -1,0 +1,11 @@
+{
+  "name": "ctrl",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Moti Granovsky <mrmag88@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "typescript": "^4.8.4"
+  }
+}
