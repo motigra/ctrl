@@ -3,7 +3,7 @@ import { VolumeBase, AppVolume } from './volume.types';
 
 const getMasterVolume = async (): Promise<VolumeBase> => {
     return new VolumeBase(
-        NodeAudioVolumeMixer.getMasterVolumeLevelScalar(),
+        Math.round(NodeAudioVolumeMixer.getMasterVolumeLevelScalar()*100),
         NodeAudioVolumeMixer.isMasterMuted()
     );
 };
@@ -15,7 +15,7 @@ const getApplicationVolumes = async (): Promise<Array<AppVolume>> => {
         apps.push(new AppVolume(
             s.pid,
             s.name || (s.pid === 0 ? 'System' : ''),
-            NodeAudioVolumeMixer.getAudioSessionVolumeLevelScalar(s.pid),
+            Math.round(NodeAudioVolumeMixer.getAudioSessionVolumeLevelScalar(s.pid)*100),
             NodeAudioVolumeMixer.isAudioSessionMuted(s.pid)
         ));
     });

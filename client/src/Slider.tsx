@@ -26,6 +26,16 @@ class Slider extends React.Component<SliderProps, SliderState> {
         this.notifyStateChange = this.notifyStateChange.bind(this);
     }
 
+    static getDerivedStateFromProps(props: SliderProps, current_state: SliderState) {
+        if (current_state.value !== props.value || current_state.muted !== props.muted) {
+            return {
+                value: props.value,
+                muted: props.muted
+            };
+        }
+        return null;
+    }
+
     handleChange(event: any) {
         const newState = { value: event.target.value, muted: this.state.muted };
         this.setState(newState);
@@ -42,14 +52,14 @@ class Slider extends React.Component<SliderProps, SliderState> {
         if (this.props.onValueChange)
             this.props.onValueChange(newState.value, newState.muted);
     }
-  
+
     render() {
         return (
             <div>
-                <span>{ this.props.title }</span>
-                <span>{ this.state.value }</span>
+                <span>{this.props.title}</span>
+                <span>{this.state.value}</span>
                 <input type="range" min="0" max="100" value={this.state.value} onInput={this.handleChange} />
-                <button onClick={this.handleMute}>{this.state.muted ? 'unmute' : 'mute' }</button>
+                <button onClick={this.handleMute}>{this.state.muted ? 'unmute' : 'mute'}</button>
             </div>
         );
     }

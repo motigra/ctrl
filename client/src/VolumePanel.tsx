@@ -1,15 +1,7 @@
 import React from 'react';
 import Slider from './Slider';
-
-type VolumeBase = {
-    volume: number;
-    muted: boolean;
-}
-
-type AppVolume = VolumeBase & {
-    name?: string;
-    pid: number
-}
+import { getVolumes } from './api';
+import { VolumeBase, AppVolume } from './volume.types';
 
 type VolumePanelProps = {};
 
@@ -23,12 +15,8 @@ class VolumePanel extends React.Component<VolumePanelProps, VolumePanelState> {
     constructor(props: VolumePanelProps) {
         super(props);
         this.state = {
-            master: { volume: 50, muted: false },
-            apps: [
-                { pid: 0, name: 'System', volume: 100, muted: false },
-                { pid: 1, name: 'Chrome', volume: 100, muted: true },
-                { pid: 2, name: 'Discord', volume: 100, muted: false }
-            ]
+            master: { volume: 0, muted: false },
+            apps: []
         };
         this.updateAppVolumeState = this.updateAppVolumeState.bind(this);
     }
@@ -42,6 +30,12 @@ class VolumePanel extends React.Component<VolumePanelProps, VolumePanelState> {
             return app;
         });
         this.setState({ apps: newState });
+    }
+
+    async componentDidMount(): Promise<void> {
+        const volumes = await getVolumes();
+        this.setState({ master: { volume: volumes.master.volume, muted: volumes.master.muted }, apps: volumes.apps});
+        console.log(volumes);
     }
 
     render() {
@@ -63,6 +57,7 @@ class VolumePanel extends React.Component<VolumePanelProps, VolumePanelState> {
                     {
                         this.state.apps.map((app: AppVolume) => (
                             <Slider
+                                key={app.pid}
                                 title={app.name}
                                 value={app.volume}
                                 muted={app.muted}
