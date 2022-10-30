@@ -14,7 +14,7 @@ const getApplicationVolumes = async (): Promise<Array<AppVolume>> => {
     sessions.forEach(s => {
         apps.push(new AppVolume(
             s.pid,
-            s.name,
+            s.name || (s.pid === 0 ? 'System' : ''),
             NodeAudioVolumeMixer.getAudioSessionVolumeLevelScalar(s.pid),
             NodeAudioVolumeMixer.isAudioSessionMuted(s.pid)
         ));

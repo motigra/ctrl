@@ -15,7 +15,7 @@ class AppVolume extends VolumeBase {
     constructor(pid: number, name?: string, vol?: number, muted?: boolean) {
         super(vol, muted);
         this.pid = pid;
-        this.name = name || 'System';
+        this.name = name || '';
     }
 }
 
