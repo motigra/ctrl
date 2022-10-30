@@ -1,7 +1,8 @@
 import * as express from 'express';
+import routes from './routes';
 
 class App {
-    public express
+    public express;
 
     constructor() {
         this.express = express();
@@ -16,6 +17,7 @@ class App {
             })
         });
         this.express.use('/', router);
+        this.express.use(routes);
     }
 }
 
