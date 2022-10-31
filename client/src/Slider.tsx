@@ -1,4 +1,5 @@
 import React from 'react';
+import debounce from 'lodash.debounce';
 
 type SliderState = {
     value: number,
@@ -22,30 +23,48 @@ class Slider extends React.Component<SliderProps, SliderState> {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleMute = this.handleMute.bind(this);
-        this.notifyStateChange = this.notifyStateChange.bind(this);
+        //this.notifyStateChange = this.notifyStateChange.bind(this);
     }
 
-    static getDerivedStateFromProps(props: SliderProps, current_state: SliderState) {
-        if (current_state.value !== props.value || current_state.muted !== props.muted) {
-            return {
-                value: props.value,
-                muted: props.muted
-            };
+    // without this, master volume doesn't update when it is fetched from the server, because the props change but that doesn't automatically affect the state
+    // this approach seems to cause the least amount of recalculations - only when props change, not reactive to internal state changes.
+    componentDidUpdate(prevProps: Readonly<SliderProps>, prevState: Readonly<SliderState>, snapshot?: any): void {
+        if (prevProps.value !== this.props.value || prevProps.muted !== this.props.muted) {
+            console.log('derived state');
+            this.setState({
+                value: this.props.value || 0,
+                muted: this.props.muted || false
+            });
         }
-        return null;
     }
 
-    handleChange(event: any) {
-        const newState = { value: event.target.value, muted: this.state.muted };
+    // static getDerivedStateFromProps(props: SliderProps, current_state: SliderState) {
+    //     console.log('derived state');
+    //     if (current_state.value !== props.value || current_state.muted !== props.muted) {
+    //         return {
+    //             value: props.value,
+    //             muted: props.muted
+    //         };
+    //     }
+    //     return null;
+    // }
+
+    handleChange (event: any) {
+        const newState = { value: parseInt(event.target.value), muted: this.state.muted };
         this.setState(newState);
-        this.notifyStateChange(newState);
+        this.debouncedStateChange(newState);
     }
 
     handleMute(event: any) {
         const newState = { value: this.state.value, muted: !this.state.muted };
         this.setState(newState);
-        this.notifyStateChange(newState);
+        this.debouncedStateChange(newState);
     }
+
+    debouncedStateChange = debounce((newState) => {
+        //this.setState(newState);
+        this.notifyStateChange(newState);
+    }, 500)
 
     notifyStateChange(newState: SliderState) {
         if (this.props.onValueChange)
@@ -57,7 +76,7 @@ class Slider extends React.Component<SliderProps, SliderState> {
             <div>
                 <span>{this.props.title}</span>
                 <span>{this.state.value}</span>
-                <input type="range" min="0" max="100" value={this.state.value} onInput={this.handleChange} />
+                <input type="range" min="0" max="100" value={this.state.value} onChange={this.handleChange} />
                 <button onClick={this.handleMute}>{this.state.muted ? 'unmute' : 'mute'}</button>
             </div>
         );
