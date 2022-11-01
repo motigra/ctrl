@@ -1,5 +1,6 @@
 import React from 'react';
 import debounce from 'lodash.debounce';
+import './VolumeSlider.css';
 
 type SliderState = {
     value: number,
@@ -13,7 +14,7 @@ type SliderProps = {
     onValueChange?: (value: number, muted: boolean) => void
 };
 
-class Slider extends React.Component<SliderProps, SliderState> {
+class VolumeSlider extends React.Component<SliderProps, SliderState> {
 
     constructor(props: SliderProps) {
         super(props);
@@ -73,14 +74,14 @@ class Slider extends React.Component<SliderProps, SliderState> {
 
     render() {
         return (
-            <div>
-                <span>{this.props.title}</span>
-                <span>{this.state.value}</span>
-                <input type="range" min="0" max="100" value={this.state.value} onChange={this.handleChange} />
-                <button onClick={this.handleMute}>{this.state.muted ? 'unmute' : 'mute'}</button>
+            <div className="volume-slider-wrapper">
+                <span className='volume-slider-cell'>{this.props.title}</span>
+                <span className='volume-slider-cell'>{this.state.value}</span>
+                <span className='volume-slider-cell'><input type="range" min="0" max="100" value={this.state.value} onChange={this.handleChange} /></span>
+                <span className='volume-slider-cell'><button onClick={this.handleMute}>{this.state.muted ? 'unmute' : 'mute'}</button></span>
             </div>
         );
     }
 }
 
-export default Slider;
+export default VolumeSlider;

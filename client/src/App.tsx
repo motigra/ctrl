@@ -1,12 +1,12 @@
 import './App.css';
-import VolumePanel from './VolumePanel';
+import ControlGrid from './ControlGrid';
 
 function App() {
 
   return (
     <div className="App">
       <header className="App-header">
-        <VolumePanel />
+        <ControlGrid rows={5} cols={6} />
       </header>
     </div>
   );

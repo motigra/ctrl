@@ -1,0 +1,18 @@
+.volume-slider-wrapper {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: 3fr 1fr 5fr 1fr;
+    grid-template-rows: 1fr;
+    grid-auto-flow: column dense;
+}
+
+.volume-slider-cell {
+    grid-column-end: span 1;
+    grid-row-end: span 1;
+}
+
+.volume-slider-cell input[type="range"] {
+    width: 95%;
+}

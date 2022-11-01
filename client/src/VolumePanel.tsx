@@ -1,7 +1,8 @@
 import React from 'react';
-import Slider from './Slider';
+import VolumeSlider from './VolumeSlider';
 import { getVolumes } from './api';
 import { VolumeBase, AppVolume } from './volume.types';
+import './VolumePanel.css';
 
 type VolumePanelProps = {};
 
@@ -40,10 +41,10 @@ class VolumePanel extends React.Component<VolumePanelProps, VolumePanelState> {
 
     render() {
         return (
-            <div>
-                <div>Volume Controls</div>
-                <div>
-                    <Slider
+            <div className='volume-panel-wrapper'>
+                <div className='volume-panel-row'>Volume Controls</div>
+                <div className='volume-panel-row'>
+                    <VolumeSlider
                         title={'Master'}
                         value={this.state.master.volume}
                         muted={this.state.master.muted}
@@ -53,10 +54,10 @@ class VolumePanel extends React.Component<VolumePanelProps, VolumePanelState> {
                         }}
                     />
                 </div>
-                <div>
+                <div className='volume-panel-row'>
                     {
                         this.state.apps.map((app: AppVolume) => (
-                            <Slider
+                            <VolumeSlider
                                 key={app.pid}
                                 title={app.name}
                                 value={app.volume}
