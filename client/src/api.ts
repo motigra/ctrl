@@ -29,4 +29,11 @@ const getVolumes = async (): Promise<any> => {
 
 };
 
-export { getVolumes };
+const launchCalc = async (): Promise<any> => {
+    await fetch('http://localhost:3001/cmd/calc', {
+        method: 'POST'
+    });
+    return;
+}
+
+export { getVolumes, launchCalc };

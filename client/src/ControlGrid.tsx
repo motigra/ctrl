@@ -1,5 +1,6 @@
 import React, { CSSProperties, ReactNode } from 'react';
 import VolumePanel from './VolumePanel';
+import CalcButton from './CalcButton';
 import './ControlGrid.css';
 
 type ControlGridItem = {
@@ -25,10 +26,7 @@ class ControlGrid extends React.Component<ControlGridProps, ControlGridState> {
         this.state = {
             items: [
                 { title: 'Volume', rows: 3, cols: 3, component: VolumePanel},
-                // { title: 'square', rows: 2, cols: 2 },
-                // { title: 'span', rows: 1, cols: 3 },
-                // { title: 'smol', rows: 1, cols: 1 },
-                // { title: 'tall', rows: 2, cols: 1 }
+                { title: 'Calc', rows: 1, cols: 1, component: CalcButton}
             ]
         };
     }
@@ -39,8 +37,6 @@ class ControlGrid extends React.Component<ControlGridProps, ControlGridState> {
             gridTemplateRows : `repeat(${this.props.rows}, 1fr)`
         };
     }
-
-    // grid-row-end: span 2
 
     generateItemStyle(item: ControlGridItem): CSSProperties {
         return {
