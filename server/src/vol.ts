@@ -1,6 +1,10 @@
 import { NodeAudioVolumeMixer } from "node-audio-volume-mixer";
 import { VolumeBase, AppVolume } from './volume.types';
 
+const getVolumeSessions = async (): Promise<any> => {
+    return NodeAudioVolumeMixer.getAudioSessionProcesses();
+}
+
 const getMasterVolume = async (): Promise<VolumeBase> => {
     return new VolumeBase(
         Math.round(NodeAudioVolumeMixer.getMasterVolumeLevelScalar()*100),
@@ -22,4 +26,18 @@ const getApplicationVolumes = async (): Promise<Array<AppVolume>> => {
     return apps;
 };
 
-export { getMasterVolume, getApplicationVolumes };
+const setMasterVolume = async (volume: VolumeBase): Promise<null> => {
+    NodeAudioVolumeMixer.setMasterVolumeLevelScalar(volume.vol/100);
+    NodeAudioVolumeMixer.muteMaster(volume.muted)
+    return;
+}
+
+const setApplicationVolume = async (appVolume: AppVolume): Promise<null> => {
+    console.log('set aop volume');
+    console.log(appVolume);
+    NodeAudioVolumeMixer.setAudioSessionVolumeLevelScalar(appVolume.pid, appVolume.vol/100);
+    NodeAudioVolumeMixer.setAudioSessionMute(appVolume.pid, appVolume.muted);
+    return;
+}
+
+export { getVolumeSessions, getMasterVolume, getApplicationVolumes, setMasterVolume, setApplicationVolume };

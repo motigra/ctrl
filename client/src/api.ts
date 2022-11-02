@@ -36,4 +36,15 @@ const launchCalc = async (): Promise<any> => {
     return;
 }
 
-export { getVolumes, launchCalc };
+const updateVolume = async (name:string, volume:number, muted:boolean): Promise<any> => {
+    const res = await fetch(`http://localhost:3001/volumes/${name}`, {
+        method: 'POST',
+        body: JSON.stringify({ volume, muted }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    return res.json();
+}
+
+export { getVolumes, launchCalc, updateVolume };

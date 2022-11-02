@@ -1,6 +1,6 @@
 import React from 'react';
 import VolumeSlider from './VolumeSlider';
-import { getVolumes } from './api';
+import { getVolumes, updateVolume } from './api';
 import { VolumeBase, AppVolume } from './volume.types';
 import './VolumePanel.css';
 
@@ -39,6 +39,11 @@ class VolumePanel extends React.Component<VolumePanelProps, VolumePanelState> {
         console.log(volumes);
     }
 
+    async updateVolume(name:string, volume:number, muted:boolean): Promise<any> {
+        const res = await updateVolume(name, volume, muted);
+        console.log(res);
+    }
+
     render() {
         return (
             <div className='volume-panel-wrapper'>
@@ -51,6 +56,7 @@ class VolumePanel extends React.Component<VolumePanelProps, VolumePanelState> {
                         onValueChange={ (value, muted) => {
                             this.setState({ master: { volume: value, muted: muted } });
                             console.log(`master vol: ${value} muted: ${muted}`);
+                            this.updateVolume('master', value, muted);
                         }}
                     />
                 </div>
@@ -65,6 +71,7 @@ class VolumePanel extends React.Component<VolumePanelProps, VolumePanelState> {
                                 onValueChange={ (value, muted) => {
                                     this.updateAppVolumeState(app.pid, value, muted);
                                     console.log(`app: ${app.name} vol: ${value} muted: ${muted}`)
+                                    this.updateVolume(app.name || '', value, muted);
                                 }}
                             />
                         ))

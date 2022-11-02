@@ -12,12 +12,15 @@ class App {
     }
 
     private setMiddleware(): void {
-        const allowedOrigins = ['http://localhost:3000'];
 
+        // Json parsing
+        this.express.use(express.json());
+
+        // CORS
+        const allowedOrigins = ['http://localhost:3000'];
         const options: cors.CorsOptions = {
             origin: allowedOrigins
         };
-
         this.express.use(cors(options));
     }
 
