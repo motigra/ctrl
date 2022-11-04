@@ -1,5 +1,6 @@
 import * as manifest from './manifest.json';
 import * as robot from 'robotjs';
+import keys from './keys';
 
 // https://github.com/octalmage/robotjs/blob/c9cbd98ec47378dfae62871f0f2830782322b06d/src/robotjs.cc
 
@@ -16,11 +17,23 @@ import * as robot from 'robotjs';
     ```
  */
 
-const desktop = (): void => {
-    robot.keyTap("D", "command");    
+const mediaToggle = (): void => {
+    robot.keyTap(keys.audio.play);
 };
 
-const typeLorem = (): void => {
+const mediaNext = (): void => {
+    robot.keyTap(keys.audio.next);
+};
+
+const mediaPrev = (): void => {
+    robot.keyTap(keys.audio.prev);
+};
+
+const desktop = (): void => {
+    robot.keyTap("D", keys.modifiers.winkey);    
+};
+
+const lorem = (): void => {
     return; // this is the devil lmao
     robot.typeString(
         `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
@@ -30,4 +43,4 @@ const typeLorem = (): void => {
     );
 }
 
-export { desktop, typeLorem };
+export { desktop, lorem, mediaToggle, mediaNext, mediaPrev };
