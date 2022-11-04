@@ -1,6 +1,6 @@
 import React from 'react';
 import VolumeSlider from './VolumeSlider';
-import { getVolumes, updateVolume } from './api';
+import { getVolumes, updateVolume } from '../../api';
 import { VolumeBase, AppVolume } from './volume.types';
 import './VolumePanel.css';
 
@@ -36,12 +36,10 @@ class VolumePanel extends React.Component<VolumePanelProps, VolumePanelState> {
     async componentDidMount(): Promise<void> {
         const volumes = await getVolumes();
         this.setState({ master: { volume: volumes.master.volume, muted: volumes.master.muted }, apps: volumes.apps});
-        console.log(volumes);
     }
 
     async updateVolume(name:string, volume:number, muted:boolean): Promise<any> {
         const res = await updateVolume(name, volume, muted);
-        console.log(res);
     }
 
     render() {
@@ -55,7 +53,6 @@ class VolumePanel extends React.Component<VolumePanelProps, VolumePanelState> {
                         muted={this.state.master.muted}
                         onValueChange={ (value, muted) => {
                             this.setState({ master: { volume: value, muted: muted } });
-                            console.log(`master vol: ${value} muted: ${muted}`);
                             this.updateVolume('master', value, muted);
                         }}
                     />
@@ -70,7 +67,6 @@ class VolumePanel extends React.Component<VolumePanelProps, VolumePanelState> {
                                 muted={app.muted}
                                 onValueChange={ (value, muted) => {
                                     this.updateAppVolumeState(app.pid, value, muted);
-                                    console.log(`app: ${app.name} vol: ${value} muted: ${muted}`)
                                     this.updateVolume(app.name || '', value, muted);
                                 }}
                             />

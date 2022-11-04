@@ -1,7 +1,6 @@
 import React, { CSSProperties, ReactNode } from 'react';
-import VolumePanel from './VolumePanel';
-import CalcButton from './CalcButton';
-import AppButton from './AppButton';
+import { VolumePanel, AppButton, MacroButton } from './controls';
+import icons from './controls/buttons/icons';
 import './ControlGrid.css';
 
 type ControlGridItem = {
@@ -27,14 +26,24 @@ class ControlGrid extends React.Component<ControlGridProps, ControlGridState> {
         super(props);
         this.state = {
             items: [
-                { title: 'Volume', rows: 3, cols: 3, component: VolumePanel },
-                { title: 'calculator', rows: 1, cols: 1, component: AppButton, props: { name: 'calc', title: 'calculator' }},
-                { title: 'spotify', rows: 1, cols: 1, component: AppButton, props: { name: 'spotify' }},
-                { title: 'vscode', rows: 1, cols: 1, component: AppButton, props: { name: 'vscode', title: 'VS Code' }},
-                { title: 'discord', rows: 1, cols: 1, component: AppButton, props: { name: 'discord' }}
+                { title: 'volume', rows: 3, cols: 3, component: VolumePanel },
+                { title: 'discord', rows: 1, cols: 1, component: AppButton, props: { name: "discord", title: "Discord", icon: icons.discord }},
+                { title: 'resolve', rows: 1, cols: 1, component: AppButton, props: { name: "resolve", title: "Resolve" }},
+                { title: 'fusion360', rows: 1, cols: 1, component: AppButton, props: { name: "fusion360", title: "Fusion360" }},
+                { title: 'vscode', rows: 1, cols: 1, component: AppButton, props: { name: "vscode", title: "VS Code", icon: icons.vscode }},
+                { title: 'calc', rows: 1, cols: 1, component: AppButton, props: { name: "calc", title: "Calculator", icon: icons.calc }},
+                { title: 'spotify', rows: 1, cols: 1, component: AppButton, props: { name: "spotify", title: "Spotify" }},
+                { title: 'chrome', rows: 1, cols: 1, component: AppButton, props: { name: "chrome", title: "Chrome", icon: icons.chrome }},
+                { title: 'affinity', rows: 1, cols: 1, component: AppButton, props: { name: "affinity", title: "Affinity" }},
+                { title: 'mediaToggle', rows: 1, cols: 1, component: MacroButton, props: { name: "mediaToggle", title: "Play/Pause", icon: icons.playpause }},
+                { title: 'mediaNext', rows: 1, cols: 1, component: MacroButton, props: { name: "mediaNext", title: "Next", icon: icons.next }},
+                { title: 'mediaPrev', rows: 1, cols: 1, component: MacroButton, props: { name: "mediaPrev", title: "Prev", icon: icons.prev }},
+                { title: 'desktop', rows: 1, cols: 1, component: MacroButton, props: { name: "desktop", title: "Desktop" }}
             ]
         };
     }
+
+    
 
     generateContainerStyle(): CSSProperties {
         return {

@@ -31,24 +31,12 @@ class VolumeSlider extends React.Component<SliderProps, SliderState> {
     // this approach seems to cause the least amount of recalculations - only when props change, not reactive to internal state changes.
     componentDidUpdate(prevProps: Readonly<SliderProps>, prevState: Readonly<SliderState>, snapshot?: any): void {
         if (prevProps.value !== this.props.value || prevProps.muted !== this.props.muted) {
-            console.log('derived state');
             this.setState({
                 value: this.props.value || 0,
                 muted: this.props.muted || false
             });
         }
     }
-
-    // static getDerivedStateFromProps(props: SliderProps, current_state: SliderState) {
-    //     console.log('derived state');
-    //     if (current_state.value !== props.value || current_state.muted !== props.muted) {
-    //         return {
-    //             value: props.value,
-    //             muted: props.muted
-    //         };
-    //     }
-    //     return null;
-    // }
 
     handleChange (event: any) {
         const newState = { value: parseInt(event.target.value), muted: this.state.muted };

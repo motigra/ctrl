@@ -1,5 +1,7 @@
 import React from 'react';
-import * as api from './api';
+import * as api from '../../api';
+import icons from './icons';
+import './Buttons.css';
 
 type AppButtonProps = {
     name: string;
@@ -17,9 +19,18 @@ class AppButton extends React.Component<AppButtonProps, {}> {
         await api.launchApp(this.props.name);
     }
 
+    // 
+
+    generateIconStyle(): React.CSSProperties {
+        const image = this.props.icon || icons.power;
+        return {
+            backgroundImage: `url(${image})`
+        }
+    }
+
     render() {
         return (
-            <div><button onClick={this.launchApp}>{ this.props.title || this.props.name }</button></div>
+            <div><button className='buttonControl' style={this.generateIconStyle()} onClick={this.launchApp}>{ this.props.title || this.props.name }</button></div>
         )
     }
 }

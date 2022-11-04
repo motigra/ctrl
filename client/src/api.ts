@@ -1,4 +1,4 @@
-import { VolumeBase, AppVolume } from './volume.types';
+import { VolumeBase, AppVolume } from './controls/volume/volume.types';
 
 const server = 'localhost';
 
@@ -45,6 +45,13 @@ const launchApp = async (name: string): Promise<any> => {
     return;
 }
 
+const runMacro = async (name: string): Promise<any> => {
+    await fetch(`http://${server}:3001/macro/${name}`, {
+        method: 'POST'
+    });
+    return;
+}
+
 const updateVolume = async (name:string, volume:number, muted:boolean): Promise<any> => {
     const res = await fetch(`http://${server}:3001/volumes/${name}`, {
         method: 'POST',
@@ -56,4 +63,4 @@ const updateVolume = async (name:string, volume:number, muted:boolean): Promise<
     return res.json();
 }
 
-export { getVolumes, launchCalc, updateVolume, launchApp };
+export { getVolumes, launchCalc, updateVolume, launchApp, runMacro };
