@@ -5,6 +5,7 @@
         "outDir": "dist",
         "sourceMap": true,
         "moduleResolution": "node",
+        "resolveJsonModule": true,
         "typeRoots": [
             "node_modules/@types"
         ],
