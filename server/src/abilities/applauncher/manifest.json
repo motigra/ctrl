@@ -6,7 +6,7 @@
     },
     "resolve": {
         "name": "Resolve",
-        "cmd": "C:\\Program Files\\Blackmagic Design\\DaVinci Resolve\\Resolve.exe",
+        "cmd": "\"C:\\Program Files\\Blackmagic Design\\DaVinci Resolve\\Resolve.exe\"",
         "icon": ""
     },
     "fusion360": {
@@ -14,9 +14,9 @@
         "cmd": "%LocalAppData%\\Autodesk\\webdeploy\\production\\6a0c9611291d45bb9226980209917c3d\\FusionLauncher.exe",
         "icon": "%LocalAppData%\\Autodesk\\webdeploy\\production\\6a0c9611291d45bb9226980209917c3d\\Fusion360.ico"
     },
-    "vsCode": {
+    "vscode": {
         "name": "VS Code",
-        "cmd": "%LocalAppData%\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+        "cmd": "\"%LocalAppData%\\Programs\\Microsoft VS Code\\Code.exe\"",
         "icon": ""
     },
     "calc": {
@@ -36,7 +36,7 @@
     },
     "affinity": {
         "name": "Affinity",
-        "cmd": "C:\\Program Files\\Affinity\\Photo\\Photo.exe",
+        "cmd": "\"C:\\Program Files\\Affinity\\Photo\\Photo.exe\"",
         "icon": "C:\\Program Files\\Affinity\\Photo\\PhotoHelp\\Contents\\Resources\\shared\\icon_small.png"
     }
 }

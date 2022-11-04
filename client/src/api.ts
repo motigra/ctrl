@@ -1,6 +1,8 @@
 import { VolumeBase, AppVolume } from './volume.types';
 
-const url = 'http://localhost:3001/volumes';
+const server = 'localhost';
+
+const url = `http://${server}:3001/volumes`;
 
 const getVolumes = async (): Promise<any> => {
 
@@ -30,14 +32,21 @@ const getVolumes = async (): Promise<any> => {
 };
 
 const launchCalc = async (): Promise<any> => {
-    await fetch('http://localhost:3001/cmd/calc', {
+    await fetch(`http://${server}:3001/cmd/calc`, {
+        method: 'POST'
+    });
+    return;
+}
+
+const launchApp = async (name: string): Promise<any> => {
+    await fetch(`http://${server}:3001/launch/${name}`, {
         method: 'POST'
     });
     return;
 }
 
 const updateVolume = async (name:string, volume:number, muted:boolean): Promise<any> => {
-    const res = await fetch(`http://localhost:3001/volumes/${name}`, {
+    const res = await fetch(`http://${server}:3001/volumes/${name}`, {
         method: 'POST',
         body: JSON.stringify({ volume, muted }),
         headers: {
@@ -47,4 +56,4 @@ const updateVolume = async (name:string, volume:number, muted:boolean): Promise<
     return res.json();
 }
 
-export { getVolumes, launchCalc, updateVolume };
+export { getVolumes, launchCalc, updateVolume, launchApp };

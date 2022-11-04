@@ -1,13 +1,15 @@
 import React, { CSSProperties, ReactNode } from 'react';
 import VolumePanel from './VolumePanel';
 import CalcButton from './CalcButton';
+import AppButton from './AppButton';
 import './ControlGrid.css';
 
 type ControlGridItem = {
     title: string;
     rows: number;
     cols: number;
-    component?: React.ComponentType;
+    component?: React.ComponentType<any>;
+    props?: Object;
 };
 
 type ControlGridProps = {
@@ -25,8 +27,11 @@ class ControlGrid extends React.Component<ControlGridProps, ControlGridState> {
         super(props);
         this.state = {
             items: [
-                { title: 'Volume', rows: 3, cols: 3, component: VolumePanel},
-                { title: 'Calc', rows: 1, cols: 1, component: CalcButton}
+                { title: 'Volume', rows: 3, cols: 3, component: VolumePanel },
+                { title: 'calculator', rows: 1, cols: 1, component: AppButton, props: { name: 'calc', title: 'calculator' }},
+                { title: 'spotify', rows: 1, cols: 1, component: AppButton, props: { name: 'spotify' }},
+                { title: 'vscode', rows: 1, cols: 1, component: AppButton, props: { name: 'vscode', title: 'VS Code' }},
+                { title: 'discord', rows: 1, cols: 1, component: AppButton, props: { name: 'discord' }}
             ]
         };
     }
@@ -58,8 +63,8 @@ class ControlGrid extends React.Component<ControlGridProps, ControlGridState> {
         if (!item.component) return item.title;
 
         const Component = item.component;
-        return <Component />
 
+        return <Component {...item.props} />;
     }
 
     render() {
