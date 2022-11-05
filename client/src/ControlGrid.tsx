@@ -1,5 +1,5 @@
 import React, { CSSProperties, ReactNode } from 'react';
-import { VolumePanel, AppButton, MacroButton } from './controls';
+import { VolumePanel, AppButton, MacroButton, CpuLoad } from './controls';
 import icons from './controls/buttons/icons';
 import './ControlGrid.css';
 
@@ -38,7 +38,8 @@ class ControlGrid extends React.Component<ControlGridProps, ControlGridState> {
                 { title: 'mediaToggle', rows: 1, cols: 1, component: MacroButton, props: { name: "mediaToggle", title: "Play/Pause", icon: icons.playpause }},
                 { title: 'mediaNext', rows: 1, cols: 1, component: MacroButton, props: { name: "mediaNext", title: "Next", icon: icons.next }},
                 { title: 'mediaPrev', rows: 1, cols: 1, component: MacroButton, props: { name: "mediaPrev", title: "Prev", icon: icons.prev }},
-                { title: 'desktop', rows: 1, cols: 1, component: MacroButton, props: { name: "desktop", title: "Desktop" }}
+                { title: 'desktop', rows: 1, cols: 1, component: MacroButton, props: { name: "desktop", title: "Desktop" }},
+                { title: 'cpu', rows: 1, cols: 2, component: CpuLoad, props: {}}
             ]
         };
     }

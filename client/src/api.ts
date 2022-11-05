@@ -2,11 +2,9 @@ import { VolumeBase, AppVolume } from './controls/volume/volume.types';
 
 const server = 'localhost';
 
-const url = `http://${server}:3001/volumes`;
-
 const getVolumes = async (): Promise<any> => {
 
-    const res = await fetch(url);
+    const res = await fetch(`http://${server}:3001/volumes`);
     const json = await res.json();
     
     const masterVolume: VolumeBase = {
@@ -63,4 +61,9 @@ const updateVolume = async (name:string, volume:number, muted:boolean): Promise<
     return res.json();
 }
 
-export { getVolumes, launchCalc, updateVolume, launchApp, runMacro };
+const getMonitoring = async (name:string): Promise<any> => {
+    const res = await fetch(`http://${server}:3001/monitor/${name}`);
+    return res.json();
+}
+
+export { getVolumes, launchCalc, updateVolume, launchApp, runMacro, getMonitoring };
