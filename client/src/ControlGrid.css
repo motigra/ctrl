@@ -4,14 +4,31 @@
     display: grid;
     grid-gap: 10px;
     grid-auto-flow: column dense;
+    max-width: calc(80% * ( 9/16 ));
+    font-size:1em;
+}
+
+.grid-wrapper::before {
+    content: '';
+    width: 0;
+    padding-bottom: 100%;
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+}
+
+.grid-wrapper > *:first-child{
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
 }
 
 .grid-cell {
-    background-color: #444;
+    background: rgb(26,1,47);
+    background: linear-gradient(45deg, rgba(26,1,47,1) 0%, rgba(74,5,94,1) 80%, rgba(255,255,255,1) 100%);
     color: #fff;
-    border-radius: 5px;
+    border: 5px solid purple;
+    border-radius: 15px;
     padding: 10px;
-    /* font-size: 150%; */
+    
 }
   
 .row-span-2 {
