@@ -66,7 +66,7 @@ class VolumeSlider extends React.Component<SliderProps, SliderState> {
                 <span className='volume-slider-cell'>{this.props.title}</span>
                 <span className='volume-slider-cell'>{this.state.value}</span>
                 <span className='volume-slider-cell'><input type="range" min="0" max="100" value={this.state.value} onChange={this.handleChange} /></span>
-                <span className='volume-slider-cell'><button onClick={this.handleMute}>{this.state.muted ? 'unmute' : 'mute'}</button></span>
+                <span className='volume-slider-cell'><button className={ this.state.muted ? 'unmute' : 'mute' } onClick={this.handleMute}></button></span>
             </div>
         );
     }

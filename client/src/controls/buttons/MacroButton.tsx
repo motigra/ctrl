@@ -28,7 +28,10 @@ class MacroButton extends React.Component<MacroButtonProps, {}> {
 
     render() {
         return (
-            <div><button className='buttonControl' style={this.generateIconStyle()} onClick={this.runMacro}>{ this.props.title || this.props.name }</button></div>
+            <div className='buttonControl' onClick={this.runMacro}>
+                <div className='buttonIcon' style={this.generateIconStyle()} ></div>
+                <div className='buttonLabel'>{ this.props.title || this.props.name }</div>
+            </div>
         )
     }
 }

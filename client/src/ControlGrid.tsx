@@ -26,7 +26,7 @@ class ControlGrid extends React.Component<ControlGridProps, ControlGridState> {
         super(props);
         this.state = {
             items: [
-                { title: 'volume', rows: 3, cols: 3, component: VolumePanel },
+                { title: 'volume', rows: 2, cols: 3, component: VolumePanel },
                 { title: 'discord', rows: 1, cols: 1, component: AppButton, props: { name: "discord", title: "Discord", icon: icons.discord }},
                 { title: 'resolve', rows: 1, cols: 1, component: AppButton, props: { name: "resolve", title: "Resolve" }},
                 { title: 'fusion360', rows: 1, cols: 1, component: AppButton, props: { name: "fusion360", title: "Fusion360" }},
