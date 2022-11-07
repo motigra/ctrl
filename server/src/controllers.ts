@@ -1,7 +1,39 @@
 import { Response, Request } from 'express';
 import * as Volumes from './vol';
 import cmd from './cmd';
-import { brotliDecompressSync } from 'zlib';
+import { DTO, Sub } from '../../common/types/dto';
+import { abilities, getAbility } from './abilities';
+
+const abilityDo = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const actions = (req.body as DTO);
+        const promises: Array<Promise<any>> = [];
+        Object.keys(actions).forEach((key) => {
+            const action = actions[key][0];
+            promises.push(getAbility(key).do(action));
+        });
+        const responses = await Promise.all(promises);
+        res.status(200).json(responses);
+    } catch (error) {
+        res.status(500).json({ error });
+        throw error;
+    }
+}
+
+const abilityGet = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const info: DTO = {};
+        for (const key in abilities) {
+            if(abilities[key].get)
+                info[key] = await abilities[key].get();
+        }
+        res.status(200).json(info);
+    } catch (error) {
+        res.status(500).json({ error });
+        throw error;
+    }
+}
+
 
 const setVolumeByName = async (req: Request, res: Response): Promise<void> => {
     try {
@@ -62,4 +94,4 @@ const launchCalc = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-export { getVolumes, launchCalc, setVolumeByName };
+export { getVolumes, launchCalc, setVolumeByName, abilityDo, abilityGet };
