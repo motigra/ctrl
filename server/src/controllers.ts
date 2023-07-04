@@ -1,5 +1,5 @@
 import { Response, Request } from 'express';
-import * as Volumes from './vol';
+import * as Volumes from './abilities/volume/vol';
 import cmd from './cmd';
 import { DTO, Sub } from '../../common/types/dto';
 import { abilities, getAbility } from './abilities';

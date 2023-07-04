@@ -17,13 +17,13 @@ class AppLauncher implements IAbility {
         return [resultSub];
     }
 
-    async get(): Promise<Sub[]> {
-        const manifest: Sub = {
-            name: 'manifest',
-            args: service.getManifest()
-        };
-        return [manifest];
-    }
+    // async get(): Promise<Sub[]> {
+    //     const manifest: Sub = {
+    //         name: 'manifest',
+    //         args: service.getManifest()
+    //     };
+    //     return [manifest];
+    // }
 }
 
 export default new AppLauncher();

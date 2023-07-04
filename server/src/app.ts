@@ -1,6 +1,7 @@
 import * as express from 'express';
 import routes from './routes';
 import * as cors from 'cors';
+import path = require('path');
 
 class App {
     public express;
@@ -17,7 +18,7 @@ class App {
         this.express.use(express.json());
 
         // CORS
-        const allowedOrigins = ['http://localhost:3000'];
+        const allowedOrigins = ['http://localhost:3000', 'http://192.168.1.224:3000'];
         const options: cors.CorsOptions = {
             origin: allowedOrigins
         };
@@ -25,13 +26,8 @@ class App {
     }
 
     private mountRoutes(): void {
-        const router = express.Router();
-        router.get('/', (req, res) => {
-            res.json({
-                message: 'Hello World!'
-            })
-        });
-        this.express.use('/', router);
+        const clientPath = path.resolve(__dirname, '../../client');
+        this.express.use('/', express.static(clientPath));
         this.express.use(routes);
     }
 }
